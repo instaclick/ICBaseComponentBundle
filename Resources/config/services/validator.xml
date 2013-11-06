@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="ic_base_component.validator.unique" class="IC\Bundle\Base\ComponentBundle\Validator\Constraints\UniqueEntityValidator">
+            <tag name="validator.constraint_validator" alias="ic_base_component.validator.unique" />
+            <argument type="service" id="doctrine"/>
+        </service>
+
+        <service id="ic_base_component.validator.entity_not_identical" class="IC\Bundle\Base\ComponentBundle\Validator\Constraints\EntityNotIdenticalValidator">
+            <tag name="validator.constraint_validator" alias="ic_base_component.validator.entity_not_identical" />
+        </service>
+
+    </services>
+
+</container>
