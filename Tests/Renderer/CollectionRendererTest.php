@@ -5,6 +5,7 @@
 
 namespace IC\Bundle\Base\ComponentBundle\Tests\Renderer;
 
+use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use IC\Bundle\Base\TestBundle\Test\TestCase;
 use IC\Bundle\Base\ComponentBundle\Renderer\CollectionRenderer;
@@ -522,27 +523,89 @@ class CollectionRendererTest extends TestCase
 
     /**
      * Test exists
+     *
+     * @param mixed $element  Element to build the render.
+     * @param mixed $expected Expected result.
+     *
+     * @dataProvider providerDataForTestExists
      */
-    public function testExists()
+    public function testExists($element, $expected)
     {
-        $target  = new ArrayCollection();
-        $target2 = new ArrayCollection();
+        $collectionRenderer = new CollectionRenderer($element, array());
+        $closure            = function () {
+            return true;
+        };
 
-        $target->set('shelf', 'book');
-        $target2->set('shelf2', 'book2');
+        $this->assertEquals($expected, $collectionRenderer->exists($closure));
+    }
 
-        $collection = new ArrayCollection();
-        $collection->set('mock_key', $target);
-        $collection->set('mock_key2', $target2);
+    /**
+     * Provide data for testExists
+     *
+     * @return array
+     */
+    public function providerDataForTestExists()
+    {
+        return array(
+            array(
+                new ArrayCollection(array('a' => 1)),
+                true
+            ),
+            array(
+                new ArrayCollection(),
+                false
+            ),
+        );
+    }
 
-        $collectionRenderer = new CollectionRenderer($collection, array(
-            'fieldList' => array(
-                'key' => array('render' => 'show'),
-            )
-        ));
+    /**
+     * Test filter
+     *
+     * @param mixed   $element  Element to build the render.
+     * @param Closure $closure  Closure for filter.
+     * @param mixed   $expected Expected result.
+     *
+     * @dataProvider providerDataForTestFilter
+     */
+    public function testFilter($element, $closure, $expected)
+    {
+        $collectionRenderer = new CollectionRenderer($element, array());
 
-        $result = $collectionRenderer->next();
+        $this->assertEquals($expected, $collectionRenderer->filter($closure));
+    }
 
-        $this->assertEquals($target2, $result);
+    /**
+     * Provide data for testFilter
+     *
+     * @return array
+     */
+    public function providerDataForTestFilter()
+    {
+        $nonEmptyCollection = new ArrayCollection(array('a' => 1));
+        $emptyCollection    = new ArrayCollection();
+
+        return array(
+            array(
+                $nonEmptyCollection,
+                function () {
+                    return true;
+                },
+                $nonEmptyCollection,
+            ),
+            array(
+                new ArrayCollection(),
+                function () {
+                    return true;
+                },
+                $emptyCollection,
+            ),
+            array(
+                $nonEmptyCollection,
+                function () {
+                    return false;
+                },
+                $emptyCollection,
+            ),
+        );
     }
 }
