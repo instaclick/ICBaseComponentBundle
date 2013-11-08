@@ -130,7 +130,7 @@ class ArrayRendererTest extends TestCase
      */
     public function testNestedGetterOnNullPointer()
     {
-        $model = array();
+        $model        = array();
         $model['key'] = null;
 
         $renderer = new ArrayRenderer($model);
@@ -145,7 +145,7 @@ class ArrayRendererTest extends TestCase
      */
     public function testInvalidGetter()
     {
-        $model = array();
+        $model           = array();
         $model['author'] = 'author';
 
         $renderer = new ArrayRenderer($model);
@@ -157,7 +157,7 @@ class ArrayRendererTest extends TestCase
      */
     public function testToString()
     {
-        $model           = array();
+        $model            = array();
         $model['key']     = 'mock key';
         $model['content'] = 'mock content';
 
@@ -171,7 +171,7 @@ class ArrayRendererTest extends TestCase
      */
     public function testGetValue()
     {
-        $model           = array();
+        $model            = array();
         $model['key']     = 'mock key';
         $model['content'] = 'mock content';
 
@@ -189,7 +189,7 @@ class ArrayRendererTest extends TestCase
      */
     public function testIsRenderableWithOptionNotRecognized()
     {
-        $model           = array();
+        $model            = array();
         $model['key']     = 'mock key';
         $model['content'] = 'mock content';
 

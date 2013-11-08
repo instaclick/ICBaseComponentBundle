@@ -18,9 +18,20 @@ use IC\Bundle\Base\ComponentBundle\Tests\MockObject\GenericModel;
  * @group Unit
  *
  * @author Juti Noppornpitak <jutin@nationalfibre.net>
+ * @author John Zhang <johnz@nationalfibre.net>
  */
 class CollectionRendererTest extends TestCase
 {
+    /**
+     * test getDefaultRenderingOption
+     */
+    public function testGetDefaultRenderingOption()
+    {
+        $renderer = new CollectionRenderer(null);
+
+        $this->assertEquals($renderer->getAttribute('render'), 'show');
+    }
+
     /**
      * test attribute getter (if found)
      */
@@ -279,13 +290,11 @@ class CollectionRendererTest extends TestCase
      */
     public function testGet()
     {
-        $this->markTestSkipped('There might be an issue/bug with this method');
+        $target = new ArrayCollection();
+        $target->set('shelf', 'book');
 
-        $model = new GenericModel();
-        $model->setKey('book');
-
-        $collection = new ArrayCollection;
-        $collection->set('mock_key', $model);
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
 
         $collectionRenderer = new CollectionRenderer($collection, array(
             'fieldList' => array(
@@ -293,8 +302,17 @@ class CollectionRendererTest extends TestCase
             )
         ));
 
-        $result = $collectionRenderer->get('mock_key');
-        $this->assertEquals($model, $result);
+        $expected = new CollectionRenderer($target, array(
+            'fieldList' => array(
+                'mock_key' => array('render' => 'show'),
+            )
+        ));
+
+        $result  = $collectionRenderer->get('mock_key');
+        $result2 = $collectionRenderer->get('mock_key');
+
+        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, $result2);
     }
 
     /**
@@ -323,12 +341,11 @@ class CollectionRendererTest extends TestCase
      */
     public function testGetValues()
     {
-        $this->markTestSkipped('THere might be an issue/bug as with getValue');
-        $model = new GenericModel();
-        $model->setKey('book');
+        $target = new ArrayCollection();
+        $target->set('shelf', 'book');
 
-        $collection = new ArrayCollection;
-        $collection->set('mock_key', $model);
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
 
         $collectionRenderer = new CollectionRenderer($collection, array(
             'fieldList' => array(
@@ -336,9 +353,22 @@ class CollectionRendererTest extends TestCase
             )
         ));
 
-        $values = $collectionRenderer->getValues();
+        $expected = array(
+            'mock_key' => new CollectionRenderer(
+                $target,
+                array(
+                    'fieldList' => array(
+                        'mock_key' => array('render' => 'show'),
+                    )
+                )
+            )
+        );
 
-        $this->assertEquals($collection, $values);
+        $values  = $collectionRenderer->getValues();
+        $values2 = $collectionRenderer->getValues();
+
+        $this->assertEquals($expected, $values);
+        $this->assertEquals($expected, $values2);
     }
 
     /**
@@ -391,20 +421,27 @@ class CollectionRendererTest extends TestCase
      */
     public function testLast()
     {
-        $this->markTestSkipped();
-        $model = new GenericModel();
-        $model->setKey('book');
+        $target = new ArrayCollection();
+        $target->set('shelf', 'book');
 
-        $collection = new ArrayCollection;
-        $collection->set('mock_key', $model);
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
 
         $collectionRenderer = new CollectionRenderer($collection, array(
             'fieldList' => array(
-                'key'     => array('render' => 'hide'),
+                'key' => array('render' => 'show'),
             )
         ));
 
-        $last = $collectionRenderer->last();
+        $expected = new CollectionRenderer($target, array(
+            'fieldList' => array(
+                'key' => array('render' => 'show'),
+            )
+        ));
+
+        $result = $collectionRenderer->last();
+
+        $this->assertEquals($expected, $result);
     }
 
     /**
@@ -427,5 +464,85 @@ class CollectionRendererTest extends TestCase
         $key = $collectionRenderer->key();
 
         $this->assertEquals('mock_key', $key);
+    }
+
+    /**
+     * Test current
+     */
+    public function testCurrent()
+    {
+        $target = new ArrayCollection();
+        $target->set('shelf', 'book');
+
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
+
+        $collectionRenderer = new CollectionRenderer($collection, array(
+            'fieldList' => array(
+                'key' => array('render' => 'show'),
+            )
+        ));
+
+        $expected = new CollectionRenderer($target, array(
+            'fieldList' => array(
+                'key' => array('render' => 'show'),
+            )
+        ));
+
+        $result = $collectionRenderer->current();
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * Test next
+     */
+    public function testNext()
+    {
+        $target  = new ArrayCollection();
+        $target2 = new ArrayCollection();
+
+        $target->set('shelf', 'book');
+        $target2->set('shelf2', 'book2');
+
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
+        $collection->set('mock_key2', $target2);
+
+        $collectionRenderer = new CollectionRenderer($collection, array(
+            'fieldList' => array(
+                'key' => array('render' => 'show'),
+            )
+        ));
+
+        $result = $collectionRenderer->next();
+
+        $this->assertEquals($target2, $result);
+    }
+
+    /**
+     * Test exists
+     */
+    public function testExists()
+    {
+        $target  = new ArrayCollection();
+        $target2 = new ArrayCollection();
+
+        $target->set('shelf', 'book');
+        $target2->set('shelf2', 'book2');
+
+        $collection = new ArrayCollection();
+        $collection->set('mock_key', $target);
+        $collection->set('mock_key2', $target2);
+
+        $collectionRenderer = new CollectionRenderer($collection, array(
+            'fieldList' => array(
+                'key' => array('render' => 'show'),
+            )
+        ));
+
+        $result = $collectionRenderer->next();
+
+        $this->assertEquals($target2, $result);
     }
 }
