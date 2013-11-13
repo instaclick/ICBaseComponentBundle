@@ -192,7 +192,7 @@ class EntityToEntityIdTransformerTest extends TestCase
      *
      * @expectedException       \Symfony\Component\Form\Exception\TransformationFailedException
      * @expectedExceptionCode    500
-     * @expectedExceptionMessage An entity with id "2" does not exist.
+     * @expectedExceptionMessage "" entity with id "2" does not exist.
      */
     public function testReverseTransformWithNoEntityReturned()
     {

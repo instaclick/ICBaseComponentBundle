@@ -90,7 +90,7 @@ class EntityToEntityIdTransformer implements DataTransformerInterface
 
         if ( ! $entity) {
             throw new TransformationFailedException(
-                'An ' . $this->entityRepository->getEntityName() . 'entity with id "' . $identifier . '" does not exist.',
+                '"' . $this->entityRepository->getEntityName() . '" entity with id "' . $identifier . '" does not exist.',
                 500
             );
         }
