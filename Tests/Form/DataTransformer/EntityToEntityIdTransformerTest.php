@@ -111,10 +111,7 @@ class EntityToEntityIdTransformerTest extends TestCase
     public function testTransform($property, $value)
     {
         $helper = $this->getHelper('Unit\Entity');
-        $user   = $helper->createMock('IC\Bundle\Core\UserBundle\Entity\User', 1);
-
-        $setter = 'set'. ucfirst($property);
-        $user->$setter($value);
+        $user   = $helper->createMock('IC\Bundle\Base\ComponentBundle\Tests\MockObject\Entity\User', 1);
 
         $this->transformer = new EntityToEntityIdTransformer($this->entityRepository, $property, 'mockId');
 
@@ -135,16 +132,6 @@ class EntityToEntityIdTransformerTest extends TestCase
         $data[] = array(
             'property' => 'screenName',
             'value'    => 'mock screenName'
-        );
-
-        $data[] = array(
-            'property' => 'lastLoginDate',
-            'value'    => \DateTime::createFromFormat('Y-m-d H:i:s', '2013-12-12 23:34:45')
-        );
-
-        $data[] = array(
-            'property' => 'preferenceList',
-            'value'    => new ArrayCollection()
         );
 
         return $data;
