@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraint;
  * A custom constraint for validation entities are not equal.
  *
  * @Annotation
- * @codeCoverageIgnore
  *
  * @author Oleksandr Kovalov <oleksandrk@nationalfibre.net>
  * @author Oleksii Strutsynskyi <oleksiis@nationalfibre.net>
