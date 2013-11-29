@@ -179,7 +179,7 @@ class EntityListToEntityIdListTransformerTest extends TestCase
      * Test reverse transform with a wrong entity id
      *
      * @expectedException        \Symfony\Component\Form\Exception\TransformationFailedException
-     * @expectedExceptionMessage An entity with id "35" does not exist.
+     * @expectedExceptionMessage "" entity with id "35" does not exist.
      * @expectedExceptionCode    500
      */
     public function testReverseTransformWithWrongEntityId()

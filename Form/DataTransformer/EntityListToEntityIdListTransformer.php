@@ -90,7 +90,7 @@ class EntityListToEntityIdListTransformer implements DataTransformerInterface
 
         if ($emptyEntityId !== false) {
             throw new TransformationFailedException(
-                'An ' . $this->entityRepository->getEntityName() . 'entity with id "' . $emptyEntityId . '" does not exist.',
+                '"' . $this->entityRepository->getEntityName() . '" entity with id "' . $emptyEntityId . '" does not exist.',
                 500
             );
         }
