@@ -148,8 +148,8 @@ class InstaclickNamingStrategyTest extends TestCase
 
         $data[] = array(
             'sourceEntity' => 'IC\Bundle\Personal\ProfileBundle\Entity\Profile',
-            'targetEntity' => 'IC\Bundle\Core\SecurityBundle\Entity\BannedEmail',
-            'expected'     => 'PersonalProfileEntity_CoreSecurityBannedEmail'
+            'targetEntity' => 'IC\Bundle\User\SecurityBundle\Entity\BannedEmail',
+            'expected'     => 'PersonalProfileEntity_UserSecurityBannedEmail'
         );
 
         $data[] = array(
