@@ -57,23 +57,13 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'className' => 'IC\Bundle\Personal\IntimacyBundle\Entity\Intimacy',
-            'expected'  => 'PersonalIntimacyEntity'
+            'className' => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
+            'expected'  => 'FooBarEntity'
         );
 
         $data[] = array(
-            'className' => 'IC\Bundle\Csr\PitBundle\Entity\Queue',
-            'expected'  => 'CsrPitQueue'
-        );
-
-        $data[] = array(
-            'className' => 'IC\Bundle\Affiliate\ProfileBundle\Entity\Blacklist',
-            'expected'  => 'AffiliateProfileBlacklist'
-        );
-
-        $data[] = array(
-            'className' => 'IC\Bundle\Seo\TreeBundle\Entity\SexualPreference',
-            'expected'  => 'SeoTreeSexualPreference'
+            'className' => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
+            'expected'  => 'FooBarHello'
         );
 
         $data[] = array(
@@ -141,15 +131,15 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'sourceEntity' => 'IC\Bundle\Seo\TreeBundle\Entity\Profile',
-            'targetEntity' => 'IC\Bundle\Seo\TreeBundle\Entity\SexualPreference',
-            'expected'     => 'SeoTreeProfile_SeoTreeSexualPreference'
+            'sourceEntity' => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
+            'targetEntity' => 'IC\Bundle\Foo\BarBundle\Entity\World',
+            'expected'     => 'FooBarHello_FooBarWorld'
         );
 
         $data[] = array(
-            'sourceEntity' => 'IC\Bundle\Personal\ProfileBundle\Entity\Profile',
-            'targetEntity' => 'IC\Bundle\User\SecurityBundle\Entity\BannedEmail',
-            'expected'     => 'PersonalProfileEntity_UserSecurityBannedEmail'
+            'sourceEntity' => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
+            'targetEntity' => 'IC\Bundle\Fooo\BarrrBundle\Entity\Hello',
+            'expected'     => 'FooBarEntity_FoooBarrrHello'
         );
 
         $data[] = array(
@@ -187,21 +177,21 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Seo\TreeBundle\Entity\Profile',
+            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
             'referenceColumnName' => '',
-            'expected'            => 'seotreeprofile_id'
+            'expected'            => 'foobarhello_id'
         );
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Personal\ProfileBundle\Entity\Profile',
+            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
             'referenceColumnName' => '',
-            'expected'            => 'personalprofileentity_id'
+            'expected'            => 'foobarentity_id'
         );
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Affiliate\ProfileBundle\Entity\Blacklist',
+            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
             'referenceColumnName' => 'mockcolumnname',
-            'expected'            => 'affiliateprofileblacklist_mockcolumnname'
+            'expected'            => 'foobarhello_mockcolumnname'
         );
 
         return $data;
