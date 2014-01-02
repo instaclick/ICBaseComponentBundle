@@ -250,7 +250,7 @@ class EntityRepository implements ObjectRepository
         } catch (\Exception $exception) {
             $this->handleException(
                 $exception,
-                sprintf('Unable to filter a list of %s.', $this->getShortClassName())
+                sprintf('Unable to filter a list of %s. %s', $this->getShortClassName(), $exception->getMessage())
             );
         }
 
