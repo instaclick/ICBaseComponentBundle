@@ -57,13 +57,13 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'className' => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
-            'expected'  => 'FooBarEntity'
+            'className' => 'IC\Bundle\Base\ComponentBundle\Entity\Component',
+            'expected'  => 'BaseComponentEntity'
         );
 
         $data[] = array(
-            'className' => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
-            'expected'  => 'FooBarHello'
+            'className' => 'IC\Bundle\Base\ComponentBundle\Entity\Hello',
+            'expected'  => 'BaseComponentHello'
         );
 
         $data[] = array(
@@ -131,15 +131,9 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'sourceEntity' => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
-            'targetEntity' => 'IC\Bundle\Foo\BarBundle\Entity\World',
-            'expected'     => 'FooBarHello_FooBarWorld'
-        );
-
-        $data[] = array(
-            'sourceEntity' => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
-            'targetEntity' => 'IC\Bundle\Fooo\BarrrBundle\Entity\Hello',
-            'expected'     => 'FooBarEntity_FoooBarrrHello'
+            'sourceEntity' => 'IC\Bundle\Base\ComponentBundle\Entity\Hello',
+            'targetEntity' => 'IC\Bundle\Base\ComponentBundle\Entity\World',
+            'expected'     => 'BaseComponentHello_BaseComponentWorld'
         );
 
         $data[] = array(
@@ -177,21 +171,21 @@ class InstaclickNamingStrategyTest extends TestCase
         $data = array();
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
+            'entityName'          => 'IC\Bundle\Base\ComponentBundle\Entity\Hello',
             'referenceColumnName' => '',
-            'expected'            => 'foobarhello_id'
+            'expected'            => 'basecomponenthello_id'
         );
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Bar',
+            'entityName'          => 'IC\Bundle\Base\ComponentBundle\Entity\Component',
             'referenceColumnName' => '',
-            'expected'            => 'foobarentity_id'
+            'expected'            => 'basecomponententity_id'
         );
 
         $data[] = array(
-            'entityName'          => 'IC\Bundle\Foo\BarBundle\Entity\Hello',
+            'entityName'          => 'IC\Bundle\Base\ComponentBundle\Entity\Hello',
             'referenceColumnName' => 'mockcolumnname',
-            'expected'            => 'foobarhello_mockcolumnname'
+            'expected'            => 'basecomponenthello_mockcolumnname'
         );
 
         return $data;
