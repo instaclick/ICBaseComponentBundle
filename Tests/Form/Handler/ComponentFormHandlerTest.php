@@ -57,9 +57,13 @@ class ComponentFormHandlerTest extends TestCase
     public function testProcessInvalidForm()
     {
         $form = $this->prepareForm();
+
         $form->expects($this->once())
-             ->method('isValid')
+             ->method('isSubmitted')
              ->will($this->returnValue(false));
+
+        $form->expects($this->never())
+             ->method('isValid');
 
         $model   = new \stdClass;
         $service = new \stdClass;
@@ -74,6 +78,11 @@ class ComponentFormHandlerTest extends TestCase
     public function testProcess()
     {
         $form = $this->prepareForm();
+
+        $form->expects($this->once())
+             ->method('isSubmitted')
+             ->will($this->returnValue(true));
+
         $form->expects($this->once())
              ->method('isValid')
              ->will($this->returnValue(true));

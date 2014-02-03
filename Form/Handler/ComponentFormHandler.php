@@ -60,9 +60,9 @@ class ComponentFormHandler
         }
 
         $this->form->setData($model);
-        $this->form->bindRequest($this->request);
+        $this->form->handleRequest($this->request);
 
-        if ( ! $this->form->isValid()) {
+        if ( ! $this->form->isSubmitted() || ! $this->form->isValid()) {
             return false;
         }
 

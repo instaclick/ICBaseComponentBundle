@@ -178,12 +178,12 @@ abstract class ComponentController extends Controller
             );
         }
 
-        if ( ! $componentForm->hasChildren()) {
+        if (count($componentForm->hasChildren()) === 0) {
             return $errorList;
         }
 
         $formChildren = array_filter(
-            $componentForm->getChildren(),
+            $componentForm->all(),
             function ($child) {
                 return ! $child->isValid();
             }
@@ -225,7 +225,7 @@ abstract class ComponentController extends Controller
 
             $sessionService->remove($componentName);
 
-            $componentForm->bind($clientData);
+            $componentForm->submit($clientData);
         }
 
         return $componentForm->createView();
