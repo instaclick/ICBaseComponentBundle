@@ -33,7 +33,7 @@ class DependentEntityFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->getParent()->addEventSubscriber(new DependentEntityFormSubscriber($builder, $this->filterService));
+        $builder->addEventSubscriber(new DependentEntityFormSubscriber($builder, $this->filterService));
     }
 
     /**

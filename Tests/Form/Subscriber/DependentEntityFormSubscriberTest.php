@@ -51,7 +51,10 @@ class DependentEntityFormSubscriberTest extends TestCase
             $this->createMock('IC\Bundle\Base\ComponentBundle\Form\Service\Filter\DependentEntityFormFilterServiceInterface')
         );
 
-        $event = new FormEvent($this->createUnusedFormMock(), array());
+        $event = new FormEvent(
+            $this->createUnusedFormMock(),
+            array()
+        );
 
         $subscriber->onFieldRebind($event);
     }
@@ -151,7 +154,7 @@ class DependentEntityFormSubscriberTest extends TestCase
         );
 
         $event = new FormEvent(
-            $this->createUnusedFormMock(),
+            $this->createPartialFormMock(),
             $data
         );
 
@@ -235,9 +238,9 @@ class DependentEntityFormSubscriberTest extends TestCase
      */
     private function createFormMock($name, $optionList)
     {
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $parent = $this->createMock('Symfony\Component\Form\Form');
 
-        $form
+        $parent
             ->expects($this->once())
             ->method('add')
             ->with(
@@ -245,6 +248,13 @@ class DependentEntityFormSubscriberTest extends TestCase
                 $this->equalTo('entity'),
                 $this->equalTo($optionList)
             );
+
+        $form = $this->createMock('Symfony\Component\Form\Form');
+
+        $form
+            ->expects($this->once())
+            ->method('getParent')
+            ->will($this->returnValue($parent));
 
         return $form;
     }
@@ -254,13 +264,36 @@ class DependentEntityFormSubscriberTest extends TestCase
      *
      * @return \Symfony\Component\Form\Form
      */
+    private function createPartialFormMock()
+    {
+        $parent = $this->createMock('Symfony\Component\Form\Form');
+
+        $parent
+            ->expects($this->never())
+            ->method('add');
+
+        $form = $this->createMock('Symfony\Component\Form\Form');
+
+        $form
+            ->expects($this->once())
+            ->method('getParent')
+            ->will($this->returnValue($parent));
+
+        return $form;
+    }
+
+    /**
+     * Create a Form Mock that does not expect to be used
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     private function createUnusedFormMock()
     {
         $form = $this->createMock('Symfony\Component\Form\Form');
 
         $form
             ->expects($this->never())
-            ->method('add');
+            ->method('getParent');
 
         return $form;
     }

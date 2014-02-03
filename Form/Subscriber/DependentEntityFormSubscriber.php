@@ -49,7 +49,7 @@ class DependentEntityFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('onFieldRebind'),
-            FormEvents::PRE_SUBMIT     => array('onFieldRebind'),
+            FormEvents::PRE_SUBMIT   => array('onFieldRebind'),
         );
     }
 
@@ -64,7 +64,7 @@ class DependentEntityFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $form           = $event->getForm();
+        $form           = $event->getForm()->getParent();
         $optionList     = $this->builder->getOptions();
         $dependentValue = $this->getDependentValue($data, $optionList['dependentField']);
 

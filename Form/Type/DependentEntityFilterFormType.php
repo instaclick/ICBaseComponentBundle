@@ -36,7 +36,7 @@ class DependentEntityFilterFormType extends AbstractType
         $service    = $this->container->get($options['service']);
         $subscriber = new DependentEntityFormSubscriber($builder, $service);
 
-        $builder->getParent()->addEventSubscriber($subscriber);
+        $builder->addEventSubscriber($subscriber);
     }
 
     /**
