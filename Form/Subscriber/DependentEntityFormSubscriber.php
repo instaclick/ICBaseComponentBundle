@@ -49,7 +49,7 @@ class DependentEntityFormSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => array('onFieldRebind'),
-            FormEvents::PRE_BIND     => array('onFieldRebind'),
+            FormEvents::PRE_SUBMIT     => array('onFieldRebind'),
         );
     }
 

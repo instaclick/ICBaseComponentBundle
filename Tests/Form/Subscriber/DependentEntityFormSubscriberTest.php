@@ -38,7 +38,7 @@ class DependentEntityFormSubscriberTest extends TestCase
         $subscribedEventList = $subscriber->getSubscribedEvents();
 
         $this->assertArrayHasKey(FormEvents::PRE_SET_DATA, $subscribedEventList);
-        $this->assertArrayHasKey(FormEvents::PRE_BIND, $subscribedEventList);
+        $this->assertArrayHasKey(FormEvents::PRE_SUBMIT, $subscribedEventList);
     }
 
     /**
