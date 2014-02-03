@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
 use IC\Bundle\Base\ComponentBundle\Exception\ServiceException;
 use IC\Bundle\Base\ComponentBundle\Entity\Entity;
 use IC\Bundle\Base\ComponentBundle\Entity\Filter;
-use Symfony\Bridge\Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Custom implementation of Repository.
@@ -38,7 +38,7 @@ class EntityRepository implements ObjectRepository
     protected $classMetadata;
 
     /**
-     * @var \Symfony\Bridge\Monolog\Logger Logger
+     * @var \Psr\Log\LoggerInterface Logger
      */
     private $logger;
 
@@ -57,9 +57,9 @@ class EntityRepository implements ObjectRepository
     /**
      * Define the associated optional Logger instance.
      *
-     * @param \Symfony\Bridge\Monolog\Logger $logger Logger
+     * @param \Psr\Log\LoggerInterface $logger Logger
      */
-    public function setLogger(Logger $logger = null)
+    public function setLogger(LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
@@ -420,7 +420,7 @@ class EntityRepository implements ObjectRepository
     private function logException(\Exception $exception)
     {
         if ($this->logger) {
-            $this->logger->err(sprintf('[%s] %s', $this->getShortClassName(), $exception->getMessage()));
+            $this->logger->error(sprintf('[%s] %s', $this->getShortClassName(), $exception->getMessage()));
         }
     }
 
