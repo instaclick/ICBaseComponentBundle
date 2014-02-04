@@ -178,7 +178,7 @@ abstract class ComponentController extends Controller
             );
         }
 
-        if (count($componentForm->hasChildren()) === 0) {
+        if (count($componentForm) === 0) {
             return $errorList;
         }
 
