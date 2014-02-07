@@ -50,9 +50,9 @@ abstract class ComponentController extends Controller
      */
     protected function handleResponse($response)
     {
-        $requestService = $this->container->get('request');
+        $requestService = $this->container->get('request_stack');
 
-        if ($requestService->isXmlHttpRequest()) {
+        if ($requestService->getCurrentRequest()->isXmlHttpRequest()) {
             return $this->handleAjaxResponse($response);
         }
 
@@ -112,12 +112,14 @@ abstract class ComponentController extends Controller
     protected function handleNormalResponse($response)
     {
         $sessionService = $this->container->get('session');
-        $requestService = $this->container->get('request');
+        $requestService = $this->container->get('request_stack');
 
         if ( ! $response) {
-            $sessionService->set($this->getComponentName(), $requestService->request);
+            $request = $requestService->getCurrentRequest();
 
-            return $this->redirect($requestService->get('redirect'));
+            $sessionService->set($this->getComponentName(), $request->request);
+
+            return $this->redirect($request->get('redirect'));
         }
 
         return $this->redirect($this->generateUrl($this->getSuccessRoute()));
@@ -133,15 +135,16 @@ abstract class ComponentController extends Controller
     protected function handleSubRequest($url)
     {
         $httpKernelService = $this->container->get('http_kernel');
-        $requestService    = $this->container->get('request');
+        $requestService    = $this->container->get('request_stack');
+        $masterRequest     = $requestService->getMasterRequest();
 
         $request = Request::create(
             $url,
             'GET',
             array(),
-            $requestService->cookies->all(),
+            $masterRequest->cookies->all(),
             array(),
-            $requestService->server->all()
+            $masterRequest->server->all()
         );
 
         return $httpKernelService->handle($request, HttpKernelInterface::SUB_REQUEST);
