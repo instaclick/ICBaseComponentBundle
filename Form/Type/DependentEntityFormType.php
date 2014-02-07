@@ -7,6 +7,7 @@ namespace IC\Bundle\Base\ComponentBundle\Form\Type;
 
 use IC\Bundle\Base\ComponentBundle\Form\Subscriber\DependentEntityFormSubscriber;
 use IC\Bundle\Base\ComponentBundle\Form\Service\Filter\DependentEntityFormFilterService;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -33,7 +34,15 @@ class DependentEntityFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new DependentEntityFormSubscriber($builder, $this->filterService));
+        if ( ! isset($options['eventDispatcher']) || ! $options['eventDispatcher'] instanceof EventDispatcherInterface) {
+            return;
+        }
+
+        $service    = $this->filterService;
+        $subscriber = new DependentEntityFormSubscriber($builder, $service);
+        $dispatcher = $options['eventDispatcher'];
+
+        $dispatcher->addSubscriber($subscriber);
     }
 
     /**
@@ -43,7 +52,8 @@ class DependentEntityFormType extends AbstractType
     {
         $resolver->setRequired(array(
             'dependentField',
-            'dependentProperty'
+            'dependentProperty',
+            'eventDispatcher',
         ));
     }
 

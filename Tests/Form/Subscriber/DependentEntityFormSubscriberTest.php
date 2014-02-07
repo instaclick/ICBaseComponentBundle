@@ -154,7 +154,7 @@ class DependentEntityFormSubscriberTest extends TestCase
         );
 
         $event = new FormEvent(
-            $this->createPartialFormMock(),
+            $this->createUnusedFormMock(),
             $data
         );
 
@@ -238,9 +238,9 @@ class DependentEntityFormSubscriberTest extends TestCase
      */
     private function createFormMock($name, $optionList)
     {
-        $parent = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock('Symfony\Component\Form\Form');
 
-        $parent
+        $form
             ->expects($this->once())
             ->method('add')
             ->with(
@@ -248,36 +248,6 @@ class DependentEntityFormSubscriberTest extends TestCase
                 $this->equalTo('entity'),
                 $this->equalTo($optionList)
             );
-
-        $form = $this->createMock('Symfony\Component\Form\Form');
-
-        $form
-            ->expects($this->once())
-            ->method('getParent')
-            ->will($this->returnValue($parent));
-
-        return $form;
-    }
-
-    /**
-     * Create a Form Mock that does not expect to be added to
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function createPartialFormMock()
-    {
-        $parent = $this->createMock('Symfony\Component\Form\Form');
-
-        $parent
-            ->expects($this->never())
-            ->method('add');
-
-        $form = $this->createMock('Symfony\Component\Form\Form');
-
-        $form
-            ->expects($this->once())
-            ->method('getParent')
-            ->will($this->returnValue($parent));
 
         return $form;
     }
@@ -293,7 +263,7 @@ class DependentEntityFormSubscriberTest extends TestCase
 
         $form
             ->expects($this->never())
-            ->method('getParent');
+            ->method('add');
 
         return $form;
     }

@@ -64,7 +64,7 @@ class DependentEntityFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $form           = $event->getForm()->getParent();
+        $form           = $event->getForm();
         $optionList     = $this->builder->getOptions();
         $dependentValue = $this->getDependentValue($data, $optionList['dependentField']);
 
