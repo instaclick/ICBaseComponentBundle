@@ -59,6 +59,14 @@ class InstaclickNamingStrategy implements NamingStrategy
         return 'id';
     }
 
+     /**
+     * {@inheritdoc}
+     */
+    public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null)
+    {
+        return ' ';
+    }
+
     /**
      * {@inheritdoc}
      */
