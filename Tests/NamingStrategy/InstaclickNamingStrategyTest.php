@@ -190,4 +190,52 @@ class InstaclickNamingStrategyTest extends TestCase
 
         return $data;
     }
+
+    /**
+     * Returns a column name for an embedded property.
+     *
+     * @param string $propertyName
+     * @param string $embeddedColumnName
+     * @param mixed  $className
+     * @param mixed  $embeddedClassName
+     * @param string $expected
+     *
+     * @return string
+     *
+     * @dataProvider dataProviderEmbeddedFieldToColumnName
+     */
+    public function testEmbeddedFieldToColumnName($propertyName, $embeddedColumnName, $className, $embeddedClassName, $expected)
+    {
+        $actual = $this->strategy->embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className, $embeddedClassName);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Data provider for the testEmbeddedFieldToColumnName method
+     *
+     * @return array
+     */
+    public function dataProviderEmbeddedFieldToColumnName()
+    {
+        $data = array();
+
+        $data[] = array(
+            'propertyName'       => 'a',
+            'embeddedColumnName' => 'b',
+            'className'          => null,
+            'embeddedClassName'  => null,
+            'expected'           => 'a_b'
+        );
+
+        $data[] = array(
+            'propertyName'       => 'c',
+            'embeddedColumnName' => 'd',
+            'className'          => 'e',
+            'embeddedClassName'  => 'f',
+            'expected'           => 'c_d'
+        );
+
+        return $data;
+    }
 }
