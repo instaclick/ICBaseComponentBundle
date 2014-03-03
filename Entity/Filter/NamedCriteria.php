@@ -25,6 +25,16 @@ class NamedCriteria implements CriteriaInterface
     private $query;
 
     /**
+     * @var string
+     */
+    private $cacheRegion;
+
+    /**
+     * @var bool
+     */
+    private $cacheable;
+
+    /**
      * Constructor.
      *
      * @param \Doctrine\ORM\EntityManager $em         Entity manager
@@ -51,11 +61,49 @@ class NamedCriteria implements CriteriaInterface
     }
 
     /**
+     * Enable/disable second level query (result) caching for this query.
+     *
+     * @param boolean $cacheable
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setCacheable($cacheable)
+    {
+        $this->cacheable = (boolean) $cacheable;
+
+        return $this;
+    }
+
+    /**
+     * @param string $cacheRegion
+     *
+     * @return \Doctrine\ORM\AbstractQuery This query instance.
+     */
+    public function setCacheRegion($cacheRegion)
+    {
+        $this->cacheRegion = (string) $cacheRegion;
+
+        return $this;
+    }
+
+    /**
+    * Obtain the name of the second level query cache region in which query results will be stored
+    *
+    * @return The cache region name; NULL indicates the default region.
+    */
+    public function getCacheRegion()
+    {
+        return $this->cacheRegion;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getQuery()
     {
-        return $this->query;
+        return $this->query
+            ->setCacheable($this->cacheable)
+            ->setCacheRegion($this->cacheRegion);
     }
 
     /**
