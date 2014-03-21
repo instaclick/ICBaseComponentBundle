@@ -25,6 +25,7 @@ class CountryChoiceFormType extends AbstractType
 
     /**
      * A List of preffered coutries
+     *
      * @var array
      */
     private $preferredCountryList = array('CA', 'US');
@@ -32,7 +33,7 @@ class CountryChoiceFormType extends AbstractType
     /**
      * Set Country Repository
      *
-     * @param \IC\Bundle\Base\ComponentBundle\Entity\Repository\EntityRepository
+     * @param \IC\Bundle\Base\ComponentBundle\Entity\Repository\EntityRepository $countryRepository
      */
     public function setCountryRepository(EntityRepository $countryRepository)
     {
