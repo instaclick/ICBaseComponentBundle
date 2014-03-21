@@ -17,14 +17,6 @@
         <service id="ic_base_component.data_transformer.entity_list_to_entity_id_list"
                  class="IC\Bundle\Base\ComponentBundle\Form\DataTransformer\EntityListToEntityIdListTransformer" />
 
-        <!-- Form Type: Country Choice -->
-        <service id="ic_base_component.form_type.country_list" class="IC\Bundle\Base\ComponentBundle\Form\Type\CountryChoiceFormType">
-            <call method="setCountryRepository">
-                <argument type="service" id="ic_base_geographical.repository.country"/>
-            </call>
-            <tag name="form.type" alias="ic_base_component_country_choice" />
-        </service>
-
         <!-- Form Type: Entity ID List -->
         <service id="ic_base_component.form_type.entity_id_list" class="IC\Bundle\Base\ComponentBundle\Form\Type\EntityIdListFormType">
             <tag name="form.type" alias="ic_base_component_entity_id_list"/>
