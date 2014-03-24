@@ -20,7 +20,7 @@ use IC\Bundle\Base\ComponentBundle\Form\Extension\Core\ChoiceList\EntityChoiceLi
 class EntityChoiceListTest extends TestCase
 {
     /**
-     * Test that a list of BaseComponent/Entity is able to be filteres by id
+     * Test that a list of BaseComponent/Entity is able to be filtered by id
      */
     public function testPreffedViewsWithEntity()
     {

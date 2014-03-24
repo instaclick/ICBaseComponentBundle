@@ -24,10 +24,6 @@ class EntityChoiceList extends ObjectChoiceList
             throw new \InvalidArgumentException('Choice is not of type IC\Bundle\Base\ComponentBundle\Entity\Entity');
         }
 
-        //var_dump($choice); exit;
-       // echo $choice->getId();
-        //var_dump(array_search($choice->getId(), $preferredChoices, true));
-
         return false !== array_search($choice->getId(), $preferredChoices, true);
     }
 }
