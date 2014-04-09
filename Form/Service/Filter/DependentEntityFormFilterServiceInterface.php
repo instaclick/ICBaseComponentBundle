@@ -17,9 +17,9 @@ interface DependentEntityFormFilterServiceInterface
     /**
      * Build the criteria with the dependency restriction.
      *
-     * @param IC\Bundle\Base\ComponentBundle\Entity\Repository\EntityRepository $entityManager
-     * @param mixed                                                             $value
-     * @param array                                                             $optionList
+     * @param \IC\Bundle\Base\ComponentBundle\Entity\Repository\EntityRepository $entityManager
+     * @param mixed                                                              $value
+     * @param array                                                              $optionList
      *
      * @return \Doctrine\ORM\QueryBuilder
      */

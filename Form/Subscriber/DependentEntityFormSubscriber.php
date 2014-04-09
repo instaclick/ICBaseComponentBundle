@@ -56,7 +56,7 @@ class DependentEntityFormSubscriber implements EventSubscriberInterface
     /**
      * Rebind the field to an entity type with the dependent criteria build.
      *
-     * @param Symfony\Component\Form\FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      */
     public function onFieldRebind(FormEvent $event)
     {

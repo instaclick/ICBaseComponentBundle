@@ -32,8 +32,8 @@ class EntityListToEntityIdListTransformer implements DataTransformerInterface
     /**
      * Constructor
      *
-     * @param EntityRepository $entityRepository Entity repository
-     * @param string           $namedCriteria    Named criteria
+     * @param \IC\Bundle\Base\ComponentBundle\Entity\Repository\EntityRepository $entityRepository Entity repository
+     * @param string                                                             $namedCriteria    Named criteria
      */
     public function __construct(EntityRepository $entityRepository, $namedCriteria = null)
     {

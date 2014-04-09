@@ -104,8 +104,8 @@ class EntityNotIdenticalValidatorTest extends ValidatorTestCase
     /**
      * Prepare form model
      *
-     * @param int $sourceId
-     * @param int $targetId
+     * @param integer $sourceId
+     * @param integer $targetId
      *
      * @return \IC\Bundle\Base\ComponentBundle\Tests\MockObject\Form\Model\EntityNotIdenticalFormModel
      */

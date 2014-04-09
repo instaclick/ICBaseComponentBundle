@@ -30,7 +30,7 @@ class SimpleXmlElement extends \SimpleXmlElement
      * @param string $name  The name of the child element to add.
      * @param string $cdata The CDATA value of the child element.
      *
-     * @return SimpleXMLElement $child
+     * @return \SimpleXMLElement $child
      */
     public function addChildCData($name, $cdata)
     {
