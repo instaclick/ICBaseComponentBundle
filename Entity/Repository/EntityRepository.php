@@ -38,7 +38,7 @@ class EntityRepository implements ObjectRepository
     protected $classMetadata;
 
     /**
-     * @var \Psr\Log\LoggerInterface Logger
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 

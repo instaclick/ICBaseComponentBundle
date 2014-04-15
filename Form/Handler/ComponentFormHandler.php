@@ -17,17 +17,17 @@ use Symfony\Component\Form\Form;
 class ComponentFormHandler
 {
     /**
-     * @var \Symfony\Component\Form\Form Form
+     * @var \Symfony\Component\Form\Form
      */
     protected $form;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request Request
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
 
     /**
-     * @var object Service
+     * @var object
      */
     protected $service;
 

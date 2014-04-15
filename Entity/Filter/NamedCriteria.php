@@ -30,7 +30,7 @@ class NamedCriteria implements CriteriaInterface
     private $cacheRegion;
 
     /**
-     * @var bool
+     * @var boolean
      */
     private $cacheable;
 
