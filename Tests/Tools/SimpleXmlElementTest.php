@@ -38,7 +38,7 @@ class SimpleXmlElementTest extends TestCase
     /**
      * Data provider
      *
-     * @return array $data;
+     * @return array $data
      */
     public function xmlDataProvider()
     {

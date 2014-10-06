@@ -337,7 +337,7 @@ class EntityRepository implements ObjectRepository
      *
      * @param \IC\Bundle\Base\ComponentBundle\Entity\Entity $entity Entity
      *
-     * @throws \IC\Bundle\Base\ComponentBundle\Service\ServiceException
+     * @throws \IC\Bundle\Base\ComponentBundle\Exception\ServiceException
      */
     public function post(Entity $entity)
     {
@@ -353,7 +353,7 @@ class EntityRepository implements ObjectRepository
      *
      * @param \IC\Bundle\Base\ComponentBundle\Entity\Entity $entity Entity
      *
-     * @throws \IC\Bundle\Base\ComponentBundle\Service\ServiceException
+     * @throws \IC\Bundle\Base\ComponentBundle\Exception\ServiceException
      */
     public function put(Entity $entity)
     {
